@@ -200,3 +200,16 @@ Update the api-key in packages/hardhat/package.json file. You can get your key [
 > 🏃 Head to your next challenge [here](https://speedrunethereum.com).
 
 > 💬 Problems, questions, comments on the stack? Post them to the [🏗 scaffold-eth developers chat](https://t.me/joinchat/F7nCRK3kI93PoCOk)
+
+yarn generate gave me this account:
+0x8c865a242409e54b38d1e9b4814dbb2543e1b411
+ Deployer Account is 0x8c865a242409e54b38d1e9b4814dbb2543e1b411
+
+project: ./build
+domain:
+  empty-ear.surge.sh
+
+  http://empty-ear.surge.sh/
+  https://goerli.etherscan.io/address/
+  contract address.
+  0xf185eaa98bae4c13ad57fb6f05a280da9ce732de
