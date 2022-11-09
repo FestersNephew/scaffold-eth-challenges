@@ -146,5 +146,11 @@ Copy the verified address for your RiggedRoll contract and enter that into the a
 ---
 
 
+yarn generate: 
+0xf35c14566c2ec590b52e09b1cea75d682a9ce44b
 
+riggedroll contract:
+https://goerli.etherscan.io/address/0xEaF1df2B7eca9b1E004Bc2071e1224CBd7a38e47
 
+surge deployed:
+http://cruel-baseball.surge.sh/

